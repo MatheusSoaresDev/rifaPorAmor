@@ -1,0 +1,25 @@
+{
+  "name": "rifa/projetoporamor",
+  "description": "Rifa por amor. Um projeto voluntário para um projeto social que visa o suporte a crianças e adolescentes carentes.",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Matheus Soares",
+      "email": "matheus_onlive@live.com"
+    }
+  ],
+  "require" : {
+    "respect/validation" : "*",
+    "nesbot/carbon" : "*",
+    "doctrine/orm" : "*",
+    "doctrine/cache": "*",
+    "symfony/cache" : "*",
+    "ext-json": "*"
+  },
+  "autoload": {
+    "psr-4": {
+      "Rifa\\Poramor\\": "src/classes/"
+    }
+  }
+}
