@@ -2,11 +2,21 @@
 
 namespace Rifa\Poramor\Usuario;
 
-class Participante extends Usuario
+use Doctrine\ORM\EntityRepository;
+use Rifa\Poramor\Helper\EntityManagerFactory;
+use Rifa\Poramor\Helper\EntityManagerRepository;
+
+class Participante extends Usuario implements EntityManagerRepository
 {
     private string $contato;
 
-    public function participaRifa(string $nome, string $email, string $contato):bool{
-        return true;
+    protected function createUniqueID(): void
+    {
+        $this->id = uniqid("par_");
+    }
+
+    public function classRepository(): EntityRepository
+    {
+        return EntityManagerFactory::returnEntityManagerFactory()->getRepository(Participante::class);
     }
 }

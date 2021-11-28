@@ -22,10 +22,7 @@ abstract class Usuario
     protected string $email;
 
 
-    protected function createUniqueID():void
-    {
-        $this->id = uniqid();
-    }
+    protected abstract function createUniqueID():void;
 
     protected function validaNome(string $nome):bool
     {
@@ -64,5 +61,4 @@ abstract class Usuario
     {
         return $this->email;
     }
-
 }

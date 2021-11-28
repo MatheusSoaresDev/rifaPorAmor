@@ -1,6 +1,6 @@
 <?php
 
-require_once ("../vendor/autoload.php");
+require_once("../../vendor/autoload.php");
 
 use Rifa\Poramor\Helper\EntityManagerFactory;
 use Rifa\Poramor\Usuario\Admin;

@@ -2,21 +2,27 @@
 
 namespace Rifa\Poramor\Usuario;
 
+use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Repository\RepositoryFactory;
 use Rifa\Poramor\Helper\EntityManagerFactory;
+use Rifa\Poramor\Helper\EntityManagerRepository;
 use Rifa\Poramor\serviceClasses\ServiceClass;
 use Exception;
 
 /**
  * @Entity
  */
-class Admin extends Usuario
+class Admin extends Usuario implements EntityManagerRepository
 {
-
     /**
      * @Column(type="string")
      */
     private string $senha;
+
+    protected function createUniqueID(): void
+    {
+        $this->id = uniqid("adm_");
+    }
 
     public function cadastraAdmin(string $nome, string $email, string $senha):bool
     {
@@ -38,14 +44,13 @@ class Admin extends Usuario
 
     private function buscaAdmin(string $email) : Admin
     {
-        $adminRepository = $this->adminRepository();
-        $qtd_result =  $adminRepository->count(["email" => $email]);
+        $repository = $this->classRepository();
 
-        if($qtd_result == 0){
+        if($repository->count(["email" => $email]) == 0){
             throw new Exception("Nenhum administrador cadastrado com esse email!");
         }
 
-        return $adminRepository->findOneBy(["email" => $email]);
+        return $repository->findOneBy(["email" => $email]);
     }
 
     private function autenticaSenha(Admin $admin, string $senha)
@@ -57,7 +62,7 @@ class Admin extends Usuario
 
     private function verificaEmail(string $email)
     {
-        if(count($this->adminRepository()->findBy(["email" => $email])) > 0){
+        if(count($this->classRepository()->findBy(["email" => $email])) > 0){
             throw new Exception("Esse email já está cadastrado!");
         }
         return true;
@@ -73,11 +78,9 @@ class Admin extends Usuario
         return true;
     }
 
-    private function adminRepository()
+    public function classRepository(): EntityRepository
     {
-        $adminRepository = EntityManagerFactory::returnEntityManagerFactory()->getRepository(Admin::class);
-
-        return $adminRepository;
+        return EntityManagerFactory::returnEntityManagerFactory()->getRepository(Admin::class);
     }
 
     public function getSenha(): string

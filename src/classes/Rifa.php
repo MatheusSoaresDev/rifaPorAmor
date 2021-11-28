@@ -6,32 +6,107 @@ use Exception;
 use Carbon\Carbon;
 use Rifa\Poramor\serviceClasses\serviceClass;
 
+/**
+ * @Entity
+ */
 class Rifa
 {
+    /**
+     * @Id
+     * @Column(type="string")
+     */
     private string $id;
+    /**
+     * @Column(type="string")
+     */
     private string $nome;
-    private string $dataCriacao;
+    /**
+     * @Column(type="string")
+     */
     private string $dataFechamento;
+    /**
+     * @Column(type="integer")
+     */
     private int $limiteParticipantes;
+    /**
+     * @Column(type="string")
+     */
     private string $premio;
+    /**
+     * @Column(type="string")
+     */
     private string $objetivo;
-    private string $idAdmin;
 
-    public function criarRifa(string $nome, string $dataFechamento, int $limiteParticipantes, string $premio, string $objetivo/*, string $idAdmin*/):bool
+    private string $createAt;
+    private string $updateAt;
+
+    public function criarRifa(string $nome, string $dataFechamento, int $limiteParticipantes, string $premio, string $objetivo):bool
     {
-        $this->id = serviceClass::createUniqueID();//Gera id unico e aleatório; //
+        $this->id = $this->createUniqId();
+        $this->dataFechamento = $this->validaDataFechamento($dataFechamento);
 
-        if(serviceClass::validaNome($nome)){$this->nome = $nome;} else {throw new Exception("Insira ao menos um sobrenome!");} //Valida o nome; //
+        if($this->validaNome($nome)){$this->nome = $nome;}
+        if($this->validaLimiteParticipantes($limiteParticipantes)){$this->limiteParticipantes = $limiteParticipantes;}
+        if($this->validaPremio($premio)){$this->premio = $premio;}
+        if($this->validaObjetivo($objetivo)){$this->objetivo = $objetivo;}
 
-        $this->dataCriacao = Carbon::now("America/Sao_Paulo");// Insere a data e hora atual como data de criação; //
+        return true;
+    }
 
-        $this->dataFechamento = serviceClass::validaFechamento($dataFechamento); //Transforma a data de fechamento digitada para formato carbon
+    private function createUniqId():string
+    {
+        return uniqid("rifa_");
+    }
 
-        if($limiteParticipantes > 0){$this->limiteParticipantes = $limiteParticipantes;} else {throw new Exception("O limite de participantes deve ser pelo menos 1");} // Valida limite de participantes;
+    private function validaNome(string $nome):bool
+    {
+        if(empty($nome)){
+            throw new Exception("Insira seu nome e sobrenome!");
+        }
 
-        if(!empty($premio)) {$this->premio = $premio;} else {throw new Exception("Preencha o prêmio!");}
+        return true;
+    }
 
-        if(!empty($objetivo)) {$this->objetivo = $objetivo;} else {throw new Exception("Preencha o objetivo da rifa!");}
+    private function validaDataFechamento(string $fechamento)
+    {
+        $dataDigitada = explode("/", $fechamento);
+
+        $dataAtual = Carbon::now("America/Sao_Paulo");
+        $dataDigitadaCarbon = Carbon::createMidnightDate($dataDigitada[2], $dataDigitada[1], $dataDigitada[0]);
+
+        if($dataAtual->greaterThan($dataDigitadaCarbon)) {
+            throw new Exception("A data de fechamento não pode ser menor que a data de hoje!");
+        }
+
+        return $dataDigitadaCarbon->toDateString();
+    }
+
+    private function validaLimiteParticipantes(int $limite):bool
+    {
+        if($limite < 5){
+            throw new Exception("A rifa deve ter ao menos 5 participantes!");
+        }
+
+        return true;
+    }
+
+    private function validaPremio(string $premio):bool
+    {
+        if(empty($premio)){
+            throw new Exception("Informe o prêmio da rifa!");
+        }
+
+        return true;
+    }
+
+    private function validaObjetivo(string $objetivo):bool
+    {
+        if(empty($objetivo)){
+            throw new Exception("Informe aos participantes o objetivo da rifa!");
+        }
+
         return true;
     }
 }
+
+
