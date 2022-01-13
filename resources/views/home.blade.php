@@ -31,7 +31,6 @@
 
         <div class="tab-content" id="pills-tabContent">
             <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-
                 <div class="row">
                     <div class="col-sm-3 g-3">
                         <div class="card">
@@ -47,12 +46,36 @@
                             </ul>
 
                             <div class="d-grid">
-                                <button class="btn btn-primary" type="button">Editar</button>
+                                <button class="btn btn-primary mb-2" type="button">Editar</button>
                                 <button class="btn btn-danger" type="button">Fechar</button>
                             </div>
                         </div>
                     </div>
 
+                    <div class="col-sm-3 g-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Rifa de Páscoa</h5>
+                                <small> Fechamento: 21/01/2022 </small>
+                            </div>
+
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">Participantes: 30</li>
+                                <li class="list-group-item">Premio: Cupom Outback</li>
+                                <li class="list-group-item">Objetivo: Almoço solidário</li>
+                            </ul>
+
+                            <div class="d-grid">
+                                <button class="btn btn-primary mb-2" type="button">Editar</button>
+                                <button class="btn btn-danger" type="button">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row">
                     <div class="col-sm-3 g-3">
                         <div class="card">
                             <div class="card-body">
@@ -67,19 +90,14 @@
                             </ul>
 
                             <div class="d-grid">
-                                <button class="btn btn-primary" type="button">Editar</button>
+                                <button class="btn btn-primary mb-2" type="button">Editar</button>
                                 <button class="btn btn-danger" type="button">Fechar</button>
                             </div>
                         </div>
                     </div>
-
                 </div>
-
             </div>
-
-            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">...</div>
         </div>
-
     </div>
 </div>
 
