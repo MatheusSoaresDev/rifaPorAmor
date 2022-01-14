@@ -44,6 +44,6 @@ class User extends Authenticatable
 
     public function rifas()
     {
-        return $this->hasMany(Rifa::class);
+        return $this->hasMany(Rifa::class, 'id', 'id');
     }
 }

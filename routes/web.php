@@ -20,5 +20,5 @@ Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginFo
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/criar-rifa', [\App\Http\Controllers\RifaController::class, 'store']);
+Route::post('/criar-rifa', [\App\Http\Controllers\RifaController::class, 'store']);
 
