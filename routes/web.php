@@ -20,5 +20,11 @@ Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginFo
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::post('/criar-rifa', [\App\Http\Controllers\RifaController::class, 'store']);
+
+/* Rotas sem view */
+
+Route::middleware(["auth"])->group(function(){
+    Route::post('/criar-rifa', [\App\Http\Controllers\HomeController::class, 'create']);
+    Route::get('/listar-rifas', [\App\Http\Controllers\HomeController::class, 'getAll']);
+});
 

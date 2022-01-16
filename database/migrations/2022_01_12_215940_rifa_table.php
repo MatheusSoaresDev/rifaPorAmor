@@ -20,6 +20,7 @@ class RifaTable extends Migration
            $table->integer('limiteParticipantes');
            $table->string('premio');
            $table->string('objetivo');
+           $table->boolean("status")->default(true);
            $table->string('user_id');
            $table->timestamps();
 
