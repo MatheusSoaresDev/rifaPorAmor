@@ -8,9 +8,32 @@
     height: 1.5rem!important;
 }
 
-.error{
-    color: red;
-    margin-top: 10px;
+#module {
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
+#module #collapseExample.collapse:not(.show) {
+    display: block;
+    height: 3rem;
+    overflow: hidden;
+}
+
+#module #collapseExample.collapsing {
+    height: 3rem;
+}
+
+#module a.collapsed::after {
+    content: '+ Show More';
+}
+
+#module a:not(.collapsed)::after {
+    content: '- Show Less';
+}
+
+@media (min-width: 992px) {
+    .buttons-actions {
+        padding: 7em 2em 7.6em;
+    }
+}
 

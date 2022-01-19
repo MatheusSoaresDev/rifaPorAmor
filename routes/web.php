@@ -18,13 +18,11 @@ Auth::routes();
 
 Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-/* Rotas sem view */
-
 Route::middleware(["auth"])->group(function(){
-    Route::post('/criar-rifa', [\App\Http\Controllers\HomeController::class, 'create']);
-    Route::get('/listar-rifas', [\App\Http\Controllers\HomeController::class, 'getAll']);
+    Route::get('/home', [App\Http\Controllers\RifaController::class, 'index'])->name('home');
+    Route::get('/rifa/{id}', [App\Http\Controllers\RifaController::class, 'getRifa'])->name('rifa');
+
+    Route::post('/criar-rifa', [\App\Http\Controllers\RifaController::class, 'create']);
+    Route::post('/alterar-rifa', [\App\Http\Controllers\RifaController::class, 'update']);
 });
 

@@ -2,10 +2,6 @@
 
 @section('content')
 
-<script type="text/javascript">
-    criarRifa();
-</script>
-
 <div class="container">
     <div class="row justify-content-center">
         <!--<div class="col-md-8">
@@ -43,30 +39,40 @@
                             <div class="col-lg-4 col-md-6 col-sm-6 col-12 g-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $rifa->nome }}</h5>
+                                        <div class="title-card d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title">{{ $rifa->nome }}</h5>
+                                            <span class="badge bg-success">Aberta</span>
+                                        </div>
                                         <small> Fechamento: {{ $rifa->dataFechamento }}</small>
                                     </div>
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Participantes: {{ $rifa->limiteParticipantes }}</li>
                                         <li class="list-group-item">Premio: {{ $rifa->premio }}</li>
-                                        <li class="list-group-item">Objetivo: {{ $rifa->objetivo }}</li>
+                                        <li class="list-group-item">
+                                            <p>
+                                                Objetivo:
+                                                <a class="" data-bs-toggle="collapse" href="#collapseExample{{ $rifa->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    Mostrar texto...
+                                                </a>
+                                            </p>
+                                            <div class="collapse" id="collapseExample{{ $rifa->id }}">
+                                                {{ $rifa->objetivo }}
+                                            </div>
+                                        </li>
                                     </ul>
 
-                                    <div class="d-grid">
-                                        <button class="btn btn-primary mb-2" type="button">Editar</button>
-                                        <button class="btn btn-danger" type="button">Fechar</button>
-                                    </div>
+                                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = '/rifa/{{ $rifa->id }}'">Ver mais</button>
                                 </div>
                             </div>
                         @endif
                     @endforeach
 
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-12 g-3">
-                            <div class="card align-items-center" style="padding: 8.5em 2em 8.5em;">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Criar novo</a>
-                            </div>
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-12 g-3">
+                        <div class="card align-items-center" style="padding: 7.6em 2em 7.6em;">
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Criar novo</a>
                         </div>
+                    </div>
 
                 </div>
             </div>
@@ -80,26 +86,34 @@
                             <div class="col-lg-4 col-md-6 col-sm-6 col-12 g-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title">{{ $rifa->nome }}</h5>
+                                        <div class="title-card d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title">{{ $rifa->nome }}</h5>
+                                            <span class="badge bg-danger">Fechada</span>
+                                        </div>
                                         <small> Fechamento: {{ $rifa->dataFechamento }}</small>
                                     </div>
 
                                     <ul class="list-group list-group-flush">
                                         <li class="list-group-item">Participantes: {{ $rifa->limiteParticipantes }}</li>
                                         <li class="list-group-item">Premio: {{ $rifa->premio }}</li>
-                                        <li class="list-group-item">Objetivo: {{ $rifa->objetivo }}</li>
+                                        <li class="list-group-item">
+                                            <p>
+                                                Objetivo:
+                                                <a class="" data-bs-toggle="collapse" href="#collapseExample{{ $rifa->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    Mostrar texto...
+                                                </a>
+                                            </p>
+                                            <div class="collapse" id="collapseExample{{ $rifa->id }}">
+                                                {{ $rifa->objetivo }}
+                                            </div>
+                                        </li>
                                     </ul>
 
-                                    <div class="d-grid">
-                                        <button class="btn btn-primary mb-2" type="button">Editar</button>
-                                        <button class="btn btn-danger" type="button">Fechar</button>
-                                    </div>
+                                    <button class="btn btn-primary" type="button">Ver mais</button>
                                 </div>
                             </div>
-
                         @endif
                     @endforeach
-
                 </div>
             </div>
         </div>

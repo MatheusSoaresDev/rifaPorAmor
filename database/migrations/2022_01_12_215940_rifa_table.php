@@ -14,12 +14,12 @@ class RifaTable extends Migration
     public function up()
     {
         Schema::create('rifa', function (Blueprint $table){
-           $table->id();
+           $table->string('id')->primary();
            $table->string('nome');
            $table->date('dataFechamento');
            $table->integer('limiteParticipantes');
            $table->string('premio');
-           $table->string('objetivo');
+           $table->text('objetivo');
            $table->boolean("status")->default(true);
            $table->string('user_id');
            $table->timestamps();

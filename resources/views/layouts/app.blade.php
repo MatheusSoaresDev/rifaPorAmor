@@ -20,6 +20,7 @@
         });
     </script>
     <script src="{{ asset('js/criar-rifa.js') }}"></script>
+    <script src="{{ asset('js/alterar-rifa.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
