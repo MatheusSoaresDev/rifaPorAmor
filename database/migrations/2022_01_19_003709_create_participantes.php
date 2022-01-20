@@ -20,6 +20,7 @@ class CreateParticipantes extends Migration
             $table->string('contato');
             $table->string('numeroEscolhido');
             $table->boolean('vencedor')->default(false);
+            $table->boolean('status')->default(false);
             $table->string('id_rifa');
             $table->timestamps();
 

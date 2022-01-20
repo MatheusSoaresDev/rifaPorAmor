@@ -24,5 +24,6 @@ Route::middleware(["auth"])->group(function(){
 
     Route::post('/criar-rifa', [\App\Http\Controllers\RifaController::class, 'create']);
     Route::post('/alterar-rifa', [\App\Http\Controllers\RifaController::class, 'update']);
+    Route::post('/set-session', [\App\Http\Controllers\RifaController::class, 'setSession']);
 });
 

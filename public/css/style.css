@@ -31,6 +31,21 @@
     content: '- Show Less';
 }
 
+.tab-pane .table-container{
+    margin-top: 30px;
+    text-align: center;
+    overflow-x: auto;
+    height: 300px;
+}
+
+.tab-pane .menu-table{
+    margin-top: 35px;
+}
+
+table td,th {
+    vertical-align: middle;
+}
+
 @media (min-width: 992px) {
     .buttons-actions {
         padding: 7em 2em 7.6em;

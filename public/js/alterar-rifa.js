@@ -11,7 +11,6 @@ function alterarRifa()
         'id_rifa': document.getElementById("id_rifa").value,
         'nome_rifa': document.getElementById("nome_rifa").value,
         'data_fechamento': document.getElementById("data_fechamento").value,
-        'limite_part': document.getElementById("limite_part").value,
         'premio': document.getElementById("premio").value,
         'objetivo': document.getElementById("objetivo").value,
     }
@@ -26,15 +25,14 @@ function alterarRifa()
         beforeSend : function (){
             button.innerHTML = `<div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>`;
         },
-        error: function (response){
+        error: function (xhr){
             button.innerHTML = "Alterar";
-            alert("Houve um erro em sua conexão. Tente novamente!");
+
+            alertify.error(errosList);
         },
         success: function(response){
             button.innerHTML = "Alterar";
-            alert("Rifa alterada com sucesso!");
-
-            location.reload();
+            alertify.success('Rifa editada com sucesso!');
         }
     });
 }
