@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\ParticipanteController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RifaController;
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,14 +19,19 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm']);
+Route::get('/', [LoginController::class, 'showLoginForm']);
 
 Route::middleware(["auth"])->group(function(){
-    Route::get('/home', [App\Http\Controllers\RifaController::class, 'index'])->name('home');
-    Route::get('/rifa/{id}', [App\Http\Controllers\RifaController::class, 'getRifa'])->name('rifa');
+    Route::get('/home', [RifaController::class, 'all'])->name('home');
+    Route::get('/rifa/{id}', [RifaController::class, 'find'])->name('rifa');
+    
+    Route::post('/criar-rifa', [RifaController::class, 'create']);
 
-    Route::post('/criar-rifa', [\App\Http\Controllers\RifaController::class, 'create']);
-    Route::post('/alterar-rifa', [\App\Http\Controllers\RifaController::class, 'update']);
-    Route::post('/set-session', [\App\Http\Controllers\RifaController::class, 'setSession']);
+    Route::patch('/alterar-rifa', [RifaController::class, 'update']);
+    Route::patch('/fechar-rifa', [RifaController::class, 'close']);
+    Route::patch('/reabrir-rifa', [RifaController::class, 'reopen']);
+    Route::patch('/sortear-vencedor', [ParticipanteController::class, 'sortearVencedor']);
+
+    Route::post('/set-session', [RifaController::class, 'setSession']);
 });
 

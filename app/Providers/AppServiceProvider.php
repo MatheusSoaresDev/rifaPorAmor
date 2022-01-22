@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(
+            'App\Repositories\Contracts\RifaRepositoryInterface',
+            'App\Repositories\Eloquent\RifaRepository'
+        );
+
+        $this->app->bind(
+            'App\Repositories\Contracts\ParticipanteRepositoryInterface',
+            'App\Repositories\Eloquent\ParticipanteRepository'
+        );
     }
 
     /**
@@ -23,6 +32,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        Paginator::useBootstrap();
     }
 }

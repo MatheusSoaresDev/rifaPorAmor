@@ -18,7 +18,7 @@ function alterarRifa()
     var button = document.getElementById("alterar-button");
 
     $.ajax({
-        type:'POST',
+        type:'PATCH',
         dataType: 'json',
         url: '/alterar-rifa',
         data: dados,

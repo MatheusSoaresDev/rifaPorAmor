@@ -72,7 +72,6 @@
 
                 <div class="tab-pane fade @if(session('tab') == "participantes") show active @endif" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="row">
-
                         <div class="menu-table d-flex justify-content-between align-items-center">
                             <form id="filtro-form" action="/rifa/{{ $rifa->id }}" method="GET">
                                 {{ csrf_field() }}
@@ -86,25 +85,48 @@
                                 </select>
                             </form>
 
-                            <div>Status: &nbsp&nbsp @if($rifa->status == 1) <span class="badge bg-success">Aberta</span> @else <span class="badge bg-danger">Fechada</span> @endif</div>
+                            <div>
+                                Status: &nbsp&nbsp
+                                @if($rifa->status == 0)
+                                    <span class="badge bg-danger">Fechada</span>
+                                @elseif($rifa->status == 1)
+                                    <span class="badge bg-success">Aberta</span>
+                                @elseif($rifa->status == 2)
+                                    <span class="badge bg-warning">Finalizada</span>
+                                @endif
+                            </div>
 
                             <div class="dropdown">
                                 <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenu2" data-bs-toggle="dropdown" aria-expanded="false">
                                     Gerenciar
                                 </button>
+
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                    <li><button class="dropdown-item" type="button">Fechar Rifa</button></li>
-                                    <li><button class="dropdown-item" type="button">Sortear Vencedor</button></li>
-                                    <li><button class="dropdown-item" type="button">Comunicar Vencedor</button></li>
+                                    @if($rifa->status == 0)
+                                        <li><button class="dropdown-item" type="button" onclick="confirmarReabrirRifa('{{ $rifa->id }}')">Reabrir Rifa</button></li>
+                                    @elseif($rifa->status == 1)
+                                        <li><button class="dropdown-item" type="button" onclick="confirmarfecharRifa('{{ $rifa->id }}')">Fechar Rifa</button></li>
+                                    @elseif($rifa->status == 2)
+
+                                    @endif
+
+                                    @if($countVencedores == 0 && count($participantes) > 0 && ($rifa->status == 0 || $rifa->status == 1))
+                                        <li><button class="dropdown-item" type="button" onclick="confirmarSortearVencedor('{{ $rifa->id }}')">Sortear Vencedor</button></li>
+                                    @elseif($rifa->status == 2)
+                                        <li><button class="dropdown-item" type="button" onclick="confirmarSortearVencedor('{{ $rifa->id }}')">Resetar Sorteio</button></li>
+                                        <li><button class="dropdown-item" type="button">Comunicar Vencedor</button></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>
+
+                        {{ $countVencedores }}
 
                         <div class="container table-container">
                             <table class="table table-striped table-hover table-responsive">
                                 <thead>
                                     <tr>
-                                        <th scope="col">ID</th>
+                                        <!--<th scope="col">ID</th>-->
                                         <th scope="col">Nome</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Contato</th>
@@ -116,8 +138,8 @@
                                 <tbody>
                                     @if(count($participantes) > 0)
                                         @foreach($participantes as $part)
-                                            <tr>
-                                                <th scope="row">#{{ $part->id }}</th>
+                                            <tr @if ($part->vencedor == 1) style="background-color: #ffff00" @endif>
+                                                <!--<th scope="row">#{{ $part->id }}</th>-->
                                                 <td>{{ $part->nome }}</td>
                                                 <td>{{ $part->email }}</td>
                                                 <td>{{ $part->contato }}</td>
@@ -157,6 +179,7 @@
                                     @endif
                                 </tbody>
                             </table>
+                            <div class="paginate d-flex flex-row-reverse"> {{ $participantes->links() }}</div>
                         </div>
                     </div>
                 </div>
