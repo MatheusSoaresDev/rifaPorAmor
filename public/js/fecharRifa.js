@@ -1,8 +1,19 @@
 function confirmarfecharRifa(id)
 {
-    if (window.confirm("Tem certeza que deseja fechar essa rifa?")) {
-        fecharRifa(id);
-    }
+    Swal.fire({
+        title: 'Atenção!',
+        html: "Tem certeza que deseja fechar essa rifa? <br>Ao fazer isso, não será mais possivel receber participantes!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim. Fechar esta rifa!',
+        cancelButtonText: 'Cancelar',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            fecharRifa(id);
+        }
+    });
 }
 
 function fecharRifa(id){
@@ -15,12 +26,23 @@ function fecharRifa(id){
 
         },
         error: function (xhr){
-            alert('Houve um erro! Favor verifique a conexão!');
+            Swal.fire({
+                icon: 'error',
+                title: 'Ops!',
+                text: 'Erro. Verifique a sua conexão!'
+            });
         },
         success: function(response){
-            alert('Rifa fechada com sucesso!');
-
-            location.reload();
+            Swal.fire({
+                icon: 'success',
+                title: 'Otimo!',
+                text: 'A rifa foi fechada com sucesso!',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                allowEnterKey: false,
+            }).then((result) => {
+                location.reload();
+            });
         }
     });
 }

@@ -21,14 +21,14 @@ abstract class AbstractRepository
         return $this->model->find($id);
     }
 
-    public function create(array $data)
+    public function create($data)
     {
-        $this->model->create($data);
+        $this->model->create($data->getAttributes());
     }
 
-    public function update(array $data, $id)
+    public function update($data)
     {
-        $this->model->find($id)->update($data);
+        $this->model->find($data->id)->update($data->getAttributes());
     }
 
     protected function resolveModel()

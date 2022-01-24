@@ -24,8 +24,13 @@
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Abertas</button>
             </li>
+
             <li class="nav-item" role="presentation">
                 <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Fechadas</button>
+            </li>
+
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-finalizadas" type="button" role="tab" aria-controls="pills-finalizadas" aria-selected="false">Finalizadas</button>
             </li>
         </ul>
 
@@ -89,6 +94,46 @@
                                         <div class="title-card d-flex justify-content-between align-items-center">
                                             <h5 class="card-title">{{ $rifa->nome }}</h5>
                                             <span class="badge bg-danger">Fechada</span>
+                                        </div>
+                                        <small> Fechamento: {{ $rifa->dataFechamento }}</small>
+                                    </div>
+
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item">Participantes: {{ $rifa->limiteParticipantes }}</li>
+                                        <li class="list-group-item">Premio: {{ $rifa->premio }}</li>
+                                        <li class="list-group-item">
+                                            <p>
+                                                Objetivo:
+                                                <a class="" data-bs-toggle="collapse" href="#collapseExample{{ $rifa->id }}" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                                    Mostrar texto...
+                                                </a>
+                                            </p>
+                                            <div class="collapse" id="collapseExample{{ $rifa->id }}">
+                                                {{ $rifa->objetivo }}
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                    <button class="btn btn-primary" type="button">Ver mais</button>
+                                </div>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="tab-pane fade" id="pills-finalizadas" role="tabpanel" aria-labelledby="pills-finalizadas-tab">
+                <div class="row">
+
+                    @foreach($rifas as $rifa)
+                        @if($rifa->status == 2)
+
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-12 g-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="title-card d-flex justify-content-between align-items-center">
+                                            <h5 class="card-title">{{ $rifa->nome }}</h5>
+                                            <span class="badge bg-warning">Finalizada</span>
                                         </div>
                                         <small> Fechamento: {{ $rifa->dataFechamento }}</small>
                                     </div>

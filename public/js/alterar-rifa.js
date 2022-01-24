@@ -8,7 +8,7 @@ $(document).ready(function(){
 function alterarRifa()
 {
     var dados = {
-        'id_rifa': document.getElementById("id_rifa").value,
+        'id': document.getElementById("id_rifa").value,
         'nome_rifa': document.getElementById("nome_rifa").value,
         'data_fechamento': document.getElementById("data_fechamento").value,
         'premio': document.getElementById("premio").value,
@@ -27,12 +27,26 @@ function alterarRifa()
         },
         error: function (xhr){
             button.innerHTML = "Alterar";
-
-            alertify.error(errosList);
         },
         success: function(response){
             button.innerHTML = "Alterar";
-            alertify.success('Rifa editada com sucesso!');
+
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer)
+                    toast.addEventListener('mouseleave', Swal.resumeTimer)
+                }
+            })
+
+            Toast.fire({
+                icon: 'success',
+                title: 'Rifa editada com sucesso!'
+            })
         }
     });
 }

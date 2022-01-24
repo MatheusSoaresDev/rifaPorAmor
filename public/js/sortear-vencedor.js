@@ -1,9 +1,5 @@
 function confirmarSortearVencedor(idRifa)
 {
-    /*if (window.confirm("")) {
-        sortearVencedor(idRifa);
-    }*/
-
     Swal.fire({
         title: 'Atenção',
         text: "Tem deseja que deseja sortear o vencedor?",
@@ -30,7 +26,11 @@ function sortearVencedor(idRifa){
 
         },
         error: function (xhr){
-            alert("Erro! Verifique sua conexão!")
+            Swal.fire({
+                icon: 'error',
+                title: 'Ops!',
+                text: 'Erro. Verifique a sua conexão!'
+            });
         },
         success: async function (response) {
             const {value: accept} = await Swal.fire({
@@ -49,18 +49,15 @@ function sortearVencedor(idRifa){
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 allowEnterKey: false,
-                inputPlaceholder:
-                    'Deseja informa o vencedor?',
-                confirmButtonText:
-                    'OK <i class="fa fa-arrow-right"></i>',
+                inputPlaceholder: 'Deseja informa o vencedor?',
+                confirmButtonText: 'OK <i class="fa fa-arrow-right"></i>',
+            }).then((result) => {
+                location.reload();
             });
 
             if (accept) {
                 alert("teste");
             }
-
-            /*alert(");*/
-            //location.reload();
         }
     });
 }

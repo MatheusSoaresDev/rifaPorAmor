@@ -1,27 +1,27 @@
-function confirmarReabrirRifa(id)
+function confirmarResetarSorteio(idRifa)
 {
     Swal.fire({
-        title: 'Atenção!',
-        html: "Tem certeza que deseja reabrir essa rifa? <br>Ao fazer isso, a rifa passará a aceitar novos participantes!",
+        title: 'Atenção',
+        text: "Tem deseja que deseja resetar o sorteio",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Sim. Reabrir esta rifa!',
         cancelButtonText: 'Cancelar',
+        confirmButtonText: 'Resetar'
     }).then((result) => {
         if (result.isConfirmed) {
-            reabrirRifa(id);
+            resetarSorteio(idRifa);
         }
-    });
+    })
 }
 
-function reabrirRifa(id){
+function resetarSorteio(idRifa){
     $.ajax({
         type:'PATCH',
         dataType: 'json',
-        url: '/reabrir-rifa',
-        data: {'id_rifa':id},
+        url: '/resetar-sorteio',
+        data: {'id_rifa': idRifa},
         beforeSend : function (){
 
         },
@@ -32,14 +32,15 @@ function reabrirRifa(id){
                 text: 'Erro. Verifique a sua conexão!'
             });
         },
-        success: function(response){
+        success: async function (response) {
             Swal.fire({
-                icon: 'success',
                 title: 'Otimo!',
-                text: 'A rifa foi reaberta com sucesso!',
+                icon: 'success',
+                text: 'O sorteio foi resetado. Faça o sorteio novamente!',
                 allowOutsideClick: false,
                 allowEscapeKey: false,
                 allowEnterKey: false,
+                confirmButtonText: 'OK <i class="fa fa-arrow-right"></i>',
             }).then((result) => {
                 location.reload();
             });

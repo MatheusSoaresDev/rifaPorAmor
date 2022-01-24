@@ -57,13 +57,6 @@
                                             <button type="submit" class="btn btn-primary g-3 float-end" id="alterar-button">Alterar</button>
                                         </div>
                                     </div>
-
-                                    <!--<div class="col-lg-4 col-md-6 col-sm-6 col-12 g-3">
-                                        <div class="d-grid gap-3 buttons-actions">
-                                            <button class="btn btn-danger " type="button">Fechar Rifa</button>
-                                            <button class="btn btn-primary" type="button">Sortear Vencedor</button>
-                                        </div>
-                                    </div>-->
                                 </div>
                             </div>
                         </form>
@@ -110,27 +103,25 @@
 
                                     @endif
 
-                                    @if($countVencedores == 0 && count($participantes) > 0 && ($rifa->status == 0 || $rifa->status == 1))
+                                    @if($countVencedores == 0 && $countParticipantesAprovados > 1 && ($rifa->status == 0 || $rifa->status == 1))
                                         <li><button class="dropdown-item" type="button" onclick="confirmarSortearVencedor('{{ $rifa->id }}')">Sortear Vencedor</button></li>
                                     @elseif($rifa->status == 2)
-                                        <li><button class="dropdown-item" type="button" onclick="confirmarSortearVencedor('{{ $rifa->id }}')">Resetar Sorteio</button></li>
+                                        <li><button class="dropdown-item" type="button" onclick="confirmarResetarSorteio('{{ $rifa->id }}')">Resetar Sorteio</button></li>
                                         <li><button class="dropdown-item" type="button">Comunicar Vencedor</button></li>
                                     @endif
                                 </ul>
                             </div>
                         </div>
 
-                        {{ $countVencedores }}
-
                         <div class="container table-container">
                             <table class="table table-striped table-hover table-responsive">
                                 <thead>
                                     <tr>
                                         <!--<th scope="col">ID</th>-->
+                                        <th scope="col">Numero</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Contato</th>
-                                        <th scope="col">Numero</th>
                                         <th scope="col">Status</th>
                                         <th scope="col">Ações</th>
                                     </tr>
@@ -140,10 +131,10 @@
                                         @foreach($participantes as $part)
                                             <tr @if ($part->vencedor == 1) style="background-color: #ffff00" @endif>
                                                 <!--<th scope="row">#{{ $part->id }}</th>-->
+                                                <th>#{{ $part->numeroEscolhido }}</th>
                                                 <td>{{ $part->nome }}</td>
                                                 <td>{{ $part->email }}</td>
                                                 <td>{{ $part->contato }}</td>
-                                                <th>#{{ $part->numeroEscolhido }}</th>
                                                 <td>
                                                     @if($part->status == 0)
                                                         <span class="badge rounded-pill bg-secondary">Aguardando</span>
@@ -159,7 +150,7 @@
                                                         <ul class="dropdown-menu">
                                                             <li>
                                                                 @if($part->status == 0)
-                                                                    <a class="dropdown-item" href="#">Aprovar</a>
+                                                                    <a class="dropdown-item" onclick="aprovarParticipante('{{ $part->id }}')">Aprovar</a>
                                                                 @else
                                                                     <a class="dropdown-item" href="#">Cancelar</a>
                                                                 @endif

@@ -24,13 +24,16 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::middleware(["auth"])->group(function(){
     Route::get('/home', [RifaController::class, 'all'])->name('home');
     Route::get('/rifa/{id}', [RifaController::class, 'find'])->name('rifa');
-    
+
     Route::post('/criar-rifa', [RifaController::class, 'create']);
 
     Route::patch('/alterar-rifa', [RifaController::class, 'update']);
     Route::patch('/fechar-rifa', [RifaController::class, 'close']);
     Route::patch('/reabrir-rifa', [RifaController::class, 'reopen']);
-    Route::patch('/sortear-vencedor', [ParticipanteController::class, 'sortearVencedor']);
+    Route::patch('/resetar-sorteio', [RifaController::class, 'resetaSorteio']);
+    Route::patch('/sortear-vencedor', [RifaController::class, 'sortearVencedor']);
+
+
 
     Route::post('/set-session', [RifaController::class, 'setSession']);
 });

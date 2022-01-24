@@ -35,41 +35,27 @@ class RifaController extends Controller
 
         $rifa = $this->rifaRepository->find($request->id);
         $participantes = $this->participanteRepository->participantePorRifa($request->id, $filtro_session);
+
+        $countParticipantesAprovados = $this->participanteRepository->countParticipantesAprovados($request->id);
         $countVencedores = $this->participanteRepository->verificaVencedor($request->id);
 
-        return view('rifa', compact('rifa', 'participantes', 'countVencedores', 'filtro_session'));
+        return view('rifa', compact(
+            'rifa',
+            'participantes',
+            'countVencedores',
+            'countParticipantesAprovados',
+            'filtro_session')
+        );
     }
 
     public function create(RifaCreateRequest $request)
     {
-        $rifa = new Rifa();
-
-        $rifa->id = uniqid("rifa_");
-        $rifa->nome = $request->nome_rifa;
-        $rifa->dataFechamento = $request->data_fechamento;
-        $rifa->limiteParticipantes = $request->limite_part;
-        $rifa->objetivo = $request->objetivo;
-        $rifa->premio = $request->premio;
-        $rifa->user_id = auth()->user()->getAuthIdentifier();
-
-        $this->rifaRepository->create($rifa->getAttributes());
-
-        return response()->json($request);
+        return response()->json($this->rifaRepository->create($request));
     }
 
     public function update(RifaUpdateRequest $request)
     {
-        $rifa = Rifa::find($request->id_rifa);
-
-        $rifa->nome = $request->nome_rifa;
-        $rifa->dataFechamento = $request->data_fechamento;
-        $rifa->objetivo = $request->objetivo;
-        $rifa->premio = $request->premio;
-        $rifa->user_id = auth()->user()->getAuthIdentifier();
-
-        $this->rifaRepository->update($rifa->getAttributes(), $rifa->id);
-
-        return response()->json($rifa);
+        return response()->json($this->rifaRepository->update($request));
     }
 
     public function reopen(Request $request)
@@ -97,6 +83,17 @@ class RifaController extends Controller
     {
         $request->session()->put('tab', $request->name);
         return response()->json("ok");
+    }
+
+    public function sortearVencedor(Request $request)
+    {
+        $this->rifaRepository->finally($request->id_rifa);
+        return $this->rifaRepository->sortearVencedor($request->id_rifa);
+    }
+
+    public function resetaSorteio(Request $request)
+    {
+        return response()->json($this->rifaRepository->resetarSorteio($request->id_rifa));
     }
 }
 

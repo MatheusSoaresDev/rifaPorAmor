@@ -10,19 +10,6 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
 {
     protected $model = Participante::class;
 
-    public function sortearVencedor($id)
-    {
-        $vencedor = Participante::inRandomOrder()
-            ->where('status', true)
-            ->where('id_rifa', $id)
-            ->first();
-
-        $vencedor->vencedor = true;
-        $vencedor->save();
-
-        return response()->json($vencedor);
-    }
-
     public function participantePorRifa(string $id, string $fitlro)
     {
         return Participante::where("id_rifa", $id)
@@ -36,5 +23,13 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
         return count(Participante::where("id_rifa", $id)
             ->where('vencedor', true)
             ->get());
+    }
+
+    public function countParticipantesAprovados(string $id)
+    {
+        return count(Participante::where("id_rifa", $id)
+            ->where('status', true)
+            ->get());
+
     }
 }

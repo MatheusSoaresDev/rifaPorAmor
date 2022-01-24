@@ -27,6 +27,8 @@
     <script src="{{ asset('js/fecharRifa.js') }}"></script>
     <script src="{{ asset('js/reabrir-rifa.js') }}"></script>
     <script src="{{ asset('js/sortear-vencedor.js') }}"></script>
+    <script src="{{ asset('js/resetar-sorteio.js') }}"></script>
+    <script src="{{ asset('js/aprovar-participante.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
