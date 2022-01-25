@@ -32,4 +32,21 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
             ->get());
 
     }
+
+    public function buscaParticipantesPorRifa(string $idRifa, string $emailPart)
+    {
+        return Participante::where("id_rifa", $idRifa)
+            ->where("email", $emailPart)
+            ->get();
+    }
+
+    public function atualizaStatusParticipantes(array $listID)
+    {
+        foreach ($listID["idList"] as $indice => $value){
+            $part = $this->find($value);
+            $part->status = true;
+            $part->save();
+        }
+        return $listID;
+    }
 }

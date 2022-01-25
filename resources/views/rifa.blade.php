@@ -150,7 +150,7 @@
                                                         <ul class="dropdown-menu">
                                                             <li>
                                                                 @if($part->status == 0)
-                                                                    <a class="dropdown-item" onclick="aprovarParticipante('{{ $part->id }}')">Aprovar</a>
+                                                                    <a class="dropdown-item" onclick="buscarNumeros('{{ $rifa->id }}', '{{ $part->email }}')">Aprovar</a>
                                                                 @else
                                                                     <a class="dropdown-item" href="#">Cancelar</a>
                                                                 @endif

@@ -6,6 +6,7 @@ use App\Http\Requests\RifaCreateRequest;
 use App\Http\Requests\RifaUpdateRequest;
 use App\Models\Participante;
 use App\Models\Rifa;
+use App\Repositories\Contracts\ParticipanteRepositoryInterface;
 use App\Repositories\Contracts\RifaRepositoryInterface;
 use App\Repositories\Eloquent\ParticipanteRepository;
 use Illuminate\Http\Request;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\DB;
 class RifaController extends Controller
 {
     private RifaRepositoryInterface $rifaRepository;
-    private ParticipanteRepository $participanteRepository;
+    private ParticipanteRepositoryInterface $participanteRepository;
 
     public function __Construct(RifaRepositoryInterface $rifaRepository, ParticipanteRepository $participanteRepository)
     {
