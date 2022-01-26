@@ -27,7 +27,7 @@ Route::middleware(["auth"])->group(function(){
     Route::get('/home', [RifaController::class, 'all'])->name('home');
     Route::get('/rifa/{id}', [RifaController::class, 'find'])->name('rifa');
 
-    Route::get('/busca-numeros/', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
+    Route::get('/busca-numeros', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
 
     Route::patch('/alterar-rifa', [RifaController::class, 'update']);
     Route::patch('/fechar-rifa', [RifaController::class, 'close']);

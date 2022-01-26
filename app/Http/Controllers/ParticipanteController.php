@@ -22,12 +22,11 @@ class ParticipanteController extends Controller
 
     public function buscaParticipantesPorRifa(Request $request)
     {
-        return response()->json($this->participanteRepository->buscaParticipantesPorRifa($request->id, $request->email));
+        return response()->json($this->participanteRepository->buscaParticipantesPorRifa($request->id, $request->email, $request->status));
     }
 
     public function atualizaStatusParticipantes(Request $request)
     {
-        //dd($request->all();
         return response()->json($this->participanteRepository->atualizaStatusParticipantes($request->all()));
     }
 }

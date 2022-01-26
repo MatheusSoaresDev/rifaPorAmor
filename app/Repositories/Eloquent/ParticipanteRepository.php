@@ -30,21 +30,24 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
         return count(Participante::where("id_rifa", $id)
             ->where('status', true)
             ->get());
-
     }
 
-    public function buscaParticipantesPorRifa(string $idRifa, string $emailPart)
+    public function buscaParticipantesPorRifa(string $idRifa, string $emailPart, string $status)
     {
         return Participante::where("id_rifa", $idRifa)
             ->where("email", $emailPart)
+            ->where("status", $status)
             ->get();
     }
 
     public function atualizaStatusParticipantes(array $listID)
     {
-        foreach ($listID["idList"] as $indice => $value){
+        $listID = (object)$listID;
+        ($listID->funcao == "aprovar") ? $status = true : $status = false;
+
+        foreach ($listID->idList as $indice => $value){
             $part = $this->find($value);
-            $part->status = true;
+            $part->status = $status;
             $part->save();
         }
         return $listID;

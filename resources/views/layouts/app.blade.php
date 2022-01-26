@@ -28,6 +28,7 @@
     <script src="{{ asset('js/reabrir-rifa.js') }}"></script>
     <script src="{{ asset('js/sortear-vencedor.js') }}"></script>
     <script src="{{ asset('js/resetar-sorteio.js') }}"></script>
+    <script src="{{ asset('js/swal-numeros.js') }}"></script>
     <script src="{{ asset('js/aprovar-participante.js') }}"></script>
 
     <!-- Fonts -->

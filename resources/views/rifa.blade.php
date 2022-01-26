@@ -149,12 +149,13 @@
                                                         </button>
                                                         <ul class="dropdown-menu">
                                                             <li>
-                                                                @if($part->status == 0)
-                                                                    <a class="dropdown-item" onclick="buscarNumeros('{{ $rifa->id }}', '{{ $part->email }}')">Aprovar</a>
-                                                                @else
-                                                                    <a class="dropdown-item" href="#">Cancelar</a>
+                                                                @if($part->status == 0 && $rifa->status != 2)
+                                                                    <a class="dropdown-item" onclick="buscarNumeros('{{ $rifa->id }}', '{{ $part->email }}', 'aprovar')">Aprovar</a>
+                                                                @elseif($part->status == 1 && $rifa->status != 2)
+                                                                    <a class="dropdown-item" onclick="buscarNumeros('{{ $rifa->id }}', '{{ $part->email }}', 'reprovar')">Cancelar</a>
                                                                 @endif
                                                             </li>
+
                                                             <li><a class="dropdown-item" href="#">Editar</a></li>
                                                             <li><hr class="dropdown-divider"></li>
                                                             <li><a class="dropdown-item" href="#">Remover</a></li>
