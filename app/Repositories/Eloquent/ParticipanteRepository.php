@@ -29,6 +29,7 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
     {
         return count(Participante::where("id_rifa", $id)
             ->where('status', true)
+            ->groupBy("email")
             ->get());
     }
 

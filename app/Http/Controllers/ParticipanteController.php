@@ -29,4 +29,9 @@ class ParticipanteController extends Controller
     {
         return response()->json($this->participanteRepository->atualizaStatusParticipantes($request->all()));
     }
+
+    public function removerParticipante(Request $request)
+    {
+        return response()->json($this->participanteRepository->delete($request->id));
+    }
 }

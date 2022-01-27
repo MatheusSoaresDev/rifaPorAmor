@@ -19,7 +19,6 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-
     </script>
     <script src="{{ asset('js/criar-rifa.js') }}"></script>
     <script src="{{ asset('js/alterar-rifa.js') }}"></script>
@@ -30,6 +29,7 @@
     <script src="{{ asset('js/resetar-sorteio.js') }}"></script>
     <script src="{{ asset('js/swal-numeros.js') }}"></script>
     <script src="{{ asset('js/aprovar-participante.js') }}"></script>
+    <script src="{{ asset('js/remover-participante.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

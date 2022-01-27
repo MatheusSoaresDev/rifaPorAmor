@@ -90,7 +90,6 @@ async function listarNumerosRifaSwal(numerosEscolhidos, funcao) {
     }*/
 }
 
-
 function atualizaStatusParticipantes(idList, funcao){
     var acao;
 

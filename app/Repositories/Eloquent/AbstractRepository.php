@@ -31,6 +31,11 @@ abstract class AbstractRepository
         $this->model->find($data->id)->update($data->getAttributes());
     }
 
+    public function delete($id)
+    {
+        $this->model->find($id)->delete();
+    }
+
     protected function resolveModel()
     {
         return app($this->model);
