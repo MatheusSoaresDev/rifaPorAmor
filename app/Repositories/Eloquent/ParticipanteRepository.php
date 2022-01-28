@@ -53,4 +53,17 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
         }
         return $listID;
     }
+
+    public function buscaNumerosJaEscolhidos(string $idRifa)
+    {
+        $numerosEscolhidos = Participante::select('numeroEscolhido')
+            ->where('id_rifa', $idRifa)
+            ->get();
+
+        foreach ($numerosEscolhidos as $numeros => $value){
+            $listNumeros[$numeros] = $value->numeroEscolhido;
+        }
+
+        return $listNumeros;
+    }
 }

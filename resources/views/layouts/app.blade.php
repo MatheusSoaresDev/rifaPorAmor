@@ -42,6 +42,7 @@
 </head>
 <body>
     <div id="app">
+        @if(auth()->user())
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container">
                 <a class="navbar-brand">Projeto Por Amor</a>
@@ -63,6 +64,7 @@
                 </div>
             </div>
         </nav>
+        @endif
 
         <nav class="navbar navbar-expand-lg navbar-light bg-primary">
             <div class="container-fluid">

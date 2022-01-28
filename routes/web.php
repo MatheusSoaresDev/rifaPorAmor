@@ -20,13 +20,14 @@ use App\Http\Controllers\Auth\LoginController;
 Auth::routes();
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
+Route::get('/rifa/{id}', [RifaController::class, 'dadosRifaParticipante']);
 
 Route::middleware(["auth"])->group(function(){
     Route::post('/criar-rifa', [RifaController::class, 'create']);
     Route::post('/set-session', [RifaController::class, 'setSession']);
 
     Route::get('/home', [RifaController::class, 'all'])->name('home');
-    Route::get('/rifa/{id}', [RifaController::class, 'find'])->name('rifa');
+    Route::get('/adm/rifa/{id}', [RifaController::class, 'rifaAdm']);
     Route::get('/busca-numeros', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
 
     Route::patch('/alterar-rifa', [RifaController::class, 'update']);
@@ -37,6 +38,6 @@ Route::middleware(["auth"])->group(function(){
     Route::patch('/atualiza-status-participantes', [ParticipanteController::class, 'atualizaStatusParticipantes']);
 
     Route::delete('/remove-part', [ParticipanteController::class, 'removerParticipante']);
-
 });
+
 

@@ -30,23 +30,9 @@ class RifaController extends Controller
         return view('home', compact('rifas'));
     }
 
-    public function find(Request $request)
+    public function find(string $id)
     {
-        $filtro_session = $this->verificaSessao($request);
-
-        $rifa = $this->rifaRepository->find($request->id);
-        $participantes = $this->participanteRepository->participantePorRifa($request->id, $filtro_session);
-
-        $countParticipantesAprovados = $this->participanteRepository->countParticipantesAprovados($request->id);
-        $countVencedores = $this->participanteRepository->verificaVencedor($request->id);
-
-        return view('rifa', compact(
-            'rifa',
-            'participantes',
-            'countVencedores',
-            'countParticipantesAprovados',
-            'filtro_session')
-        );
+        return $this->rifaRepository->find($id);
     }
 
     public function create(RifaCreateRequest $request)
@@ -59,14 +45,43 @@ class RifaController extends Controller
         return response()->json($this->rifaRepository->update($request));
     }
 
+    public function close(Request $request)
+    {
+        return response()->json($this->rifaRepository->close($request->id_rifa));
+    }
+
     public function reopen(Request $request)
     {
         return response()->json($this->rifaRepository->reopen($request->id_rifa));
     }
 
-    public function close(Request $request)
+
+    public function rifaAdm(Request $request)
     {
-        return response()->json($this->rifaRepository->close($request->id_rifa));
+        $filtro_session = $this->verificaSessao($request);
+
+        $rifa = $this->find($request->id);
+        $participantes = $this->participanteRepository->participantePorRifa($request->id, $filtro_session);
+
+        $countParticipantesAprovados = $this->participanteRepository->countParticipantesAprovados($request->id);
+        $countVencedores = $this->participanteRepository->verificaVencedor($request->id);
+
+        return view('rifa', compact(
+                'rifa',
+                'participantes',
+                'countVencedores',
+                'countParticipantesAprovados',
+                'filtro_session')
+        );
+    }
+
+    public function dadosRifaParticipante(Request $request)
+    {
+        $rifa = $this->find($request->id);
+        $numerosJaEscolhidos = $this->participanteRepository->buscaNumerosJaEscolhidos($request->id);
+
+        return view('participante', compact('rifa', 'numerosJaEscolhidos'));
+
     }
 
     private function verificaSessao(Request $request) : string

@@ -67,7 +67,7 @@
                                         </li>
                                     </ul>
 
-                                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = '/rifa/{{ $rifa->id }}'">Ver mais</button>
+                                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = '/adm/rifa/{{ $rifa->id }}'">Ver mais</button>
                                 </div>
                             </div>
                         @endif
