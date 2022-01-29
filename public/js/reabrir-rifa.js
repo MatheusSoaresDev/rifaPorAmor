@@ -20,8 +20,7 @@ function reabrirRifa(id){
     $.ajax({
         type:'PATCH',
         dataType: 'json',
-        url: '/reabrir-rifa',
-        data: {'id_rifa':id},
+        url: '/rifa/reopen/'+id,
         beforeSend : function (){
 
         },

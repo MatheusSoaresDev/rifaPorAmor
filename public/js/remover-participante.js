@@ -20,7 +20,7 @@ function removerParticipante(id){
     $.ajax({
         type:'DELETE',
         dataType: 'json',
-        url: '/remove-part',
+        url: '/participante',
         data: {'id':id},
         beforeSend : function (){
             Swal.fire({

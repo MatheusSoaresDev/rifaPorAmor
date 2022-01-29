@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent;
 use App\Models\Participante;
 use App\Repositories\Contracts\ParticipanteRepositoryInterface;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Exception;
 
 class ParticipanteRepository extends AbstractRepository implements ParticipanteRepositoryInterface
 {
@@ -60,10 +61,13 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
             ->where('id_rifa', $idRifa)
             ->get();
 
+        $listNumeros = [];
+
         foreach ($numerosEscolhidos as $numeros => $value){
             $listNumeros[$numeros] = $value->numeroEscolhido;
         }
 
         return $listNumeros;
     }
+
 }

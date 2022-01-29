@@ -23,21 +23,22 @@ Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/rifa/{id}', [RifaController::class, 'dadosRifaParticipante']);
 
 Route::middleware(["auth"])->group(function(){
-    Route::post('/criar-rifa', [RifaController::class, 'create']);
+    Route::get('/home', [RifaController::class, 'all']);
+
+    Route::post('/rifa', [RifaController::class, 'create']);
+    Route::get('/rifa/admin/{id}', [RifaController::class, 'rifaAdm']);
+    Route::patch('/rifa', [RifaController::class, 'update']);
+    Route::patch('/rifa/close/{id}', [RifaController::class, 'close']);
+    Route::patch('/rifa/reopen/{id}', [RifaController::class, 'reopen']);
+    Route::patch('/rifa/reset/{id}', [RifaController::class, 'resetaSorteio']);
+    Route::patch('/rifa/sortear/{id}', [RifaController::class, 'sortearVencedor']);
+
+    Route::get('/busca/numeros', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
+    Route::patch('/atualiza/status', [ParticipanteController::class, 'atualizaStatusParticipantes']);
+
+    Route::delete('/participante', [ParticipanteController::class, 'removerParticipante']);
+
     Route::post('/set-session', [RifaController::class, 'setSession']);
-
-    Route::get('/home', [RifaController::class, 'all'])->name('home');
-    Route::get('/adm/rifa/{id}', [RifaController::class, 'rifaAdm']);
-    Route::get('/busca-numeros', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
-
-    Route::patch('/alterar-rifa', [RifaController::class, 'update']);
-    Route::patch('/fechar-rifa', [RifaController::class, 'close']);
-    Route::patch('/reabrir-rifa', [RifaController::class, 'reopen']);
-    Route::patch('/resetar-sorteio', [RifaController::class, 'resetaSorteio']);
-    Route::patch('/sortear-vencedor', [RifaController::class, 'sortearVencedor']);
-    Route::patch('/atualiza-status-participantes', [ParticipanteController::class, 'atualizaStatusParticipantes']);
-
-    Route::delete('/remove-part', [ParticipanteController::class, 'removerParticipante']);
 });
 
 

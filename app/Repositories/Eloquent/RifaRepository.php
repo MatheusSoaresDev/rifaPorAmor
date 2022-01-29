@@ -20,6 +20,7 @@ class RifaRepository extends AbstractRepository implements RifaRepositoryInterfa
         $rifa->limiteParticipantes = $data->limite_part;
         $rifa->objetivo = $data->objetivo;
         $rifa->premio = $data->premio;
+        $rifa->valor = $data->valor;
         $rifa->user_id = auth()->user()->getAuthIdentifier();
 
         parent::create($rifa);
@@ -34,10 +35,14 @@ class RifaRepository extends AbstractRepository implements RifaRepositoryInterfa
         $rifa->nome = $data->nome_rifa;
         $rifa->dataFechamento = $data->data_fechamento;
         $rifa->objetivo = $data->objetivo;
+        $rifa->valor = $data->valor;
         $rifa->premio = $data->premio;
 
-        parent::update($rifa);
+        if($data->limite_part > $rifa->limiteParticipantes){
+            $rifa->limiteParticipantes = $data->limite_part;
+        }
 
+        parent::update($rifa);
         return $rifa;
     }
 

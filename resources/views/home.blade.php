@@ -4,22 +4,6 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <!--<div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>-->
-
         <ul class="nav nav-pills mb-3 justify-content-end" id="pills-tab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Abertas</button>
@@ -67,7 +51,7 @@
                                         </li>
                                     </ul>
 
-                                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = '/adm/rifa/{{ $rifa->id }}'">Ver mais</button>
+                                    <button type="button" class="btn btn-primary btn-lg" onclick="window.location.href = '/rifa/admin/{{ $rifa->id }}'">Ver mais</button>
                                 </div>
                             </div>
                         @endif
@@ -179,7 +163,7 @@
                     <div class="row">
                         <div class="col-12">
                             <div class="form-group mb-3">
-                                <input type="text" class="form-control" name="nome_rifa" id="nome_rifa" placeholder="Nome da Rifa" required>
+                                <input type="text" class="form-control" name="nome_rifa" id="nome_rifa" placeholder="Nome da Rifa" minlength="5" required>
                             </div>
 
                             <div class="form-group mb-3">
@@ -193,6 +177,13 @@
 
                             <div class="form-group mb-3">
                                 <input type="text" class="form-control mb-3" name="premio" id="premio" placeholder="Prêmio" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <div class="input-group flex-nowrap">
+                                    <span class="input-group-text" id="addon-wrapping">R$</span>
+                                    <input type="text" class="form-control" placeholder="Valor da Rifa" name="valor" id="valor" >
+                                </div>
                             </div>
 
                             <div class="form-floating">

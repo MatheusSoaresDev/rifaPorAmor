@@ -30,7 +30,7 @@
 
                 @for($i=1; $i<=$rifa->limiteParticipantes; $i++)
                     <div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group" @if(in_array($i, $numerosJaEscolhidos)) data-bs-toggle="tooltip" data-bs-placement="top" title="Esse número já foi escolhido" @endif>
-                        <input type="checkbox" class="btn-check" id="btncheck{{ $i }}" autocomplete="off"  @if(in_array($i, $numerosJaEscolhidos)) disabled checked @endif>
+                        <input type="checkbox" class="btn-check" id="btncheck{{ $i }}" autocomplete="off"  @if(in_array($i, $numerosJaEscolhidos)) disabled @endif>
                         <label class="btn btn-outline-primary" for="btncheck{{ $i }}">{{ str_pad($i, 2, '0', STR_PAD_LEFT) }}</label>
                     </div>
                 @endfor

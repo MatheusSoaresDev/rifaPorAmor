@@ -14,7 +14,7 @@ class Rifa extends Model
     protected $keyType = 'string';
     protected $table = 'rifa';
 
-    protected $fillable = ['id', 'nome', 'dataFechamento', 'limiteParticipantes', 'premio', 'objetivo', 'user_id'];
+    protected $fillable = ['id', 'nome', 'dataFechamento', 'limiteParticipantes', 'premio', 'objetivo', 'valor', 'user_id'];
 
     public function user()
     {

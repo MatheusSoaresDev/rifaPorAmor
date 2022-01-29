@@ -24,7 +24,7 @@ class RifaUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'nome_rifa' => 'required|min:5',
+            'nome_rifa' => 'required',
             'data_fechamento' => 'after:'.date("Y-m-d", strtotime("-1 days")),
             'objetivo' => 'required',
             'premio' => 'required'

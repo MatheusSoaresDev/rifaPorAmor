@@ -11,7 +11,7 @@ function buscarNumeros(idRifa, emailPart, funcao){ // Retorna tanto os numeros a
     $.ajax({
         type:'GET',
         dataType: 'json',
-        url: '/busca-numeros',
+        url: '/busca/numeros',
         data: {'id': idRifa, 'email': emailPart, 'status': status},
         beforeSend : function (){
             Swal.fire({
@@ -103,7 +103,7 @@ function atualizaStatusParticipantes(idList, funcao){
     $.ajax({
         type:'PATCH',
         dataType: 'json',
-        url: '/atualiza-status-participantes',
+        url: '/atualiza/status/',
         data: {idList, 'funcao': funcao},
         beforeSend : function (){
             Swal.fire({

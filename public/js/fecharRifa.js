@@ -20,8 +20,7 @@ function fecharRifa(id){
     $.ajax({
         type:'PATCH',
         dataType: 'json',
-        url: '/fechar-rifa',
-        data: {'id_rifa':id},
+        url: '/rifa/close/'+id,
         beforeSend : function (){
 
         },

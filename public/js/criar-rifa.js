@@ -12,6 +12,7 @@ function criarRifa()
         'data_fechamento': document.getElementById("data_fechamento").value,
         'limite_part': document.getElementById("limite_part").value,
         'premio': document.getElementById("premio").value,
+        'valor': document.getElementById("valor").value,
         'objetivo': document.getElementById("objetivo").value,
     }
 
@@ -20,13 +21,35 @@ function criarRifa()
     $.ajax({
         type:'POST',
         dataType: 'json',
-        url: '/criar-rifa',
+        url: '/rifa',
         data: dados,
         beforeSend : function (){
             button.innerHTML = `<div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>`;
         },
-        error: function (response){
+        error: function (xhr){
             button.innerHTML = "Criar Rifa";
+            var arrayErrors = xhr.responseJSON.errors;
+            var result = Object.keys(arrayErrors).map(function (key) {
+                return [arrayErrors[key]];
+            });
+            var input;
+            var msgHtml;
+
+            for(i=0; i<result.length; i++){
+                input = `${result[i][0][0]}<br>`;
+
+                if(i===0){
+                    msgHtml = input;
+                } else {
+                    msgHtml = msgHtml + input;
+                }
+            }
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Ops!',
+                html: msgHtml,
+            });
         },
         success: function(response){
             button.innerHTML = "Criar Rifa";
@@ -34,4 +57,6 @@ function criarRifa()
         }
     });
 }
+
+
 

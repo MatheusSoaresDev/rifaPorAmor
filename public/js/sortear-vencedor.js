@@ -20,8 +20,7 @@ function sortearVencedor(idRifa){
     $.ajax({
         type:'PATCH',
         dataType: 'json',
-        url: '/sortear-vencedor',
-        data: {'id_rifa': idRifa},
+        url: '/rifa/sortear/'+id,
         beforeSend : function (){
 
         },

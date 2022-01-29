@@ -47,12 +47,12 @@ class RifaController extends Controller
 
     public function close(Request $request)
     {
-        return response()->json($this->rifaRepository->close($request->id_rifa));
+        return response()->json($this->rifaRepository->close($request->id));
     }
 
     public function reopen(Request $request)
     {
-        return response()->json($this->rifaRepository->reopen($request->id_rifa));
+        return response()->json($this->rifaRepository->reopen($request->id));
     }
 
 
@@ -104,12 +104,12 @@ class RifaController extends Controller
     public function sortearVencedor(Request $request)
     {
         $this->rifaRepository->finally($request->id_rifa);
-        return $this->rifaRepository->sortearVencedor($request->id_rifa);
+        return $this->rifaRepository->sortearVencedor($request->id);
     }
 
     public function resetaSorteio(Request $request)
     {
-        return response()->json($this->rifaRepository->resetarSorteio($request->id_rifa));
+        return response()->json($this->rifaRepository->resetarSorteio($request->id));
     }
 }
 

@@ -35,12 +35,20 @@
                                             <label for="exampleFormControlInput1" class="form-label">Data de fechamento</label>
                                             <input type="date" class="form-control" name="data_fechamento" id="data_fechamento" placeholder="" value="{{ $rifa->dataFechamento }}" min="<?php echo date("Y-m-d") ?>">
                                         </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="exampleFormControlInput1" class="form-label">Limite de participantes</label>
+                                            <input type="number" class="form-control mb-3" name="limite_part" id="limite_part" placeholder="Limite de participantes" min="{{ $rifa->limiteParticipantes }}" value="{{ $rifa->limiteParticipantes }}">
+                                        </div>
                                     </div>
 
                                     <div class="col-lg-6 col-md-6 col-sm-6 col-12 g-3">
                                         <div class="form-group mb-3">
-                                            <label for="exampleFormControlInput1" class="form-label">Limite de participantes</label>
-                                            <input type="number" class="form-control mb-3" name="limite_part" id="limite_part" placeholder="Limite de participantes" min="1" value="{{ $rifa->limiteParticipantes }}" disabled>
+                                            <label for="exampleFormControlInput1" class="form-label">Valor</label>
+                                            <div class="input-group flex-nowrap">
+                                                <span class="input-group-text" id="addon-wrapping">R$</span>
+                                                <input type="text" class="form-control" name="valor" id="valor" value="{{ number_format($rifa->valor, 2, ',', '.') }}">
+                                            </div>
                                         </div>
 
                                         <div class="form-group mb-3">
@@ -66,7 +74,7 @@
                 <div class="tab-pane fade @if(session('tab') == "participantes") show active @endif" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
                     <div class="row">
                         <div class="menu-table d-flex justify-content-between align-items-center">
-                            <form id="filtro-form" action="/rifa/{{ $rifa->id }}" method="GET">
+                            <form id="filtro-form" action="/rifa/admin/{{ $rifa->id }}" method="GET">
                                 {{ csrf_field() }}
 
                                 <select class="form-select" name="filtro" style="width: 200px;" onchange="this.form.submit()">

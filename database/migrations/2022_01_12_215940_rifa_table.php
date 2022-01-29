@@ -22,6 +22,7 @@ class RifaTable extends Migration
            $table->text('objetivo');
            $table->boolean("status")->default(true);
            $table->string('user_id');
+           $table->float('valor');
            $table->timestamps();
 
            $table->foreign('user_id')

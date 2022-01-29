@@ -20,8 +20,7 @@ function resetarSorteio(idRifa){
     $.ajax({
         type:'PATCH',
         dataType: 'json',
-        url: '/resetar-sorteio',
-        data: {'id_rifa': idRifa},
+        url: '/rifa/reset/'+idRifa,
         beforeSend : function (){
 
         },

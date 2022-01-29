@@ -11,7 +11,9 @@ function alterarRifa()
         'id': document.getElementById("id_rifa").value,
         'nome_rifa': document.getElementById("nome_rifa").value,
         'data_fechamento': document.getElementById("data_fechamento").value,
+        'limite_part': document.getElementById("limite_part").value,
         'premio': document.getElementById("premio").value,
+        'valor': document.getElementById("valor").value,
         'objetivo': document.getElementById("objetivo").value,
     }
 
@@ -20,7 +22,7 @@ function alterarRifa()
     $.ajax({
         type:'PATCH',
         dataType: 'json',
-        url: '/alterar-rifa',
+        url: '/rifa',
         data: dados,
         beforeSend : function (){
             button.innerHTML = `<div class="spinner-border text-light" role="status"><span class="visually-hidden">Loading...</span></div>`;
