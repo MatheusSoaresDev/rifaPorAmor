@@ -33,10 +33,11 @@ Route::middleware(["auth"])->group(function(){
     Route::patch('/rifa/reset/{id}', [RifaController::class, 'resetaSorteio']);
     Route::patch('/rifa/sortear/{id}', [RifaController::class, 'sortearVencedor']);
 
+    Route::post('/participante', [ParticipanteController::class, 'create']);
+    Route::delete('/participante', [ParticipanteController::class, 'removerParticipante']);
+
     Route::get('/busca/numeros', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
     Route::patch('/atualiza/status', [ParticipanteController::class, 'atualizaStatusParticipantes']);
-
-    Route::delete('/participante', [ParticipanteController::class, 'removerParticipante']);
 
     Route::post('/set-session', [RifaController::class, 'setSession']);
 });

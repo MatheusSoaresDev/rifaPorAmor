@@ -36,7 +36,8 @@
     <script src="{{ asset('js/resetar-sorteio.js') }}"></script>
     <script src="{{ asset('js/aprovar-participante.js') }}"></script>
     <script src="{{ asset('js/remover-participante.js') }}"></script>
-
+    <script src="{{ asset('js/valor-rifa.js') }}"></script>
+    <script src="{{ asset('js/criar-participante.js') }}"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
