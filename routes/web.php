@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/', [LoginController::class, 'showLoginForm']);
 Route::get('/rifa/{id}', [RifaController::class, 'dadosRifaParticipante']);
+Route::get('/sucesso', [RifaController::class, 'sucesso']);
 
 Route::middleware(["auth"])->group(function(){
     Route::get('/home', [RifaController::class, 'all']);
@@ -33,13 +34,16 @@ Route::middleware(["auth"])->group(function(){
     Route::patch('/rifa/reset/{id}', [RifaController::class, 'resetaSorteio']);
     Route::patch('/rifa/sortear/{id}', [RifaController::class, 'sortearVencedor']);
 
-    Route::post('/participante', [ParticipanteController::class, 'create']);
     Route::delete('/participante', [ParticipanteController::class, 'removerParticipante']);
 
-    Route::get('/busca/numeros', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
     Route::patch('/atualiza/status', [ParticipanteController::class, 'atualizaStatusParticipantes']);
 
     Route::post('/set-session', [RifaController::class, 'setSession']);
 });
+
+Route::post('/participante', [ParticipanteController::class, 'create']);
+Route::get('/busca/numeros', [ParticipanteController::class, 'buscaParticipantesPorRifa']);
+
+
 
 

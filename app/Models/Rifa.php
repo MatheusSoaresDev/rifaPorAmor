@@ -25,4 +25,9 @@ class Rifa extends Model
     {
         return $this->hasMany(Participante::class, 'id', 'id');
     }
+
+    public function registro()
+    {
+        return $this->hasOne(Registro::class, 'id', 'id');
+    }
 }

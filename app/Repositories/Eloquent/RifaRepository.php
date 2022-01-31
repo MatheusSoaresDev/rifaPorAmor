@@ -101,4 +101,11 @@ class RifaRepository extends AbstractRepository implements RifaRepositoryInterfa
 
         return response()->json($vencedores);
     }
+
+    public static function calculaValorTotalRifa(int $qtdNumeros, string $id_rifa)
+    {
+        $rifa = Rifa::find($id_rifa);
+
+        return $rifa->valor * $qtdNumeros;
+    }
 }

@@ -17,13 +17,17 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
         try {
             $dados = (object)$data;
 
-            DB::beginTransaction();
+            if(!property_exists($dados, 'numeros')){
+                throw new \Exception("Você deve selecionar ao menos um número!");
+            }
 
             $arrayNumerosEscolhidos = $this->retornaListaNumerosEscolhidos($dados->id_rifa, $dados->numeros);
 
             if($arrayNumerosEscolhidos){
-                throw new \Exception("Os números [". implode(",", $arrayNumerosEscolhidos) ."] já foram escolhidos por outro usuário!");
+                throw new \Exception("Os números [ ". implode(", ", $arrayNumerosEscolhidos) . " ] já foram escolhidos por outro usuário!");
             }
+
+            DB::beginTransaction();
 
             foreach ($dados->numeros as $key => $value) {
                 $part = new Participante();
@@ -39,11 +43,14 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
             }
 
             DB::commit();
+
         } catch (\HttpInvalidParamException $error){
             return $error->getMessage();
         }
 
-        //return true;
+        session()->put('valorTotalRifa', RifaRepository::calculaValorTotalRifa(count($dados->numeros), $dados->id_rifa));
+
+        return response()->json($dados);
     }
 
     private function retornaListaNumerosEscolhidos(string $id_rifa, array $numerosEscolhidosPart) // Verifica e coloca em um array os numeros que foram escolhidos enquanto o usuario se cadastrava na rifa.

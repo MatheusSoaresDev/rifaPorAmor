@@ -78,10 +78,18 @@ class RifaController extends Controller
     public function dadosRifaParticipante(Request $request)
     {
         $rifa = $this->find($request->id);
+
+        if(!$rifa){
+            return abort(404);
+        }
+
         $numerosJaEscolhidos = $this->participanteRepository->buscaNumerosJaEscolhidos($request->id);
 
-        return view('participante', compact('rifa', 'numerosJaEscolhidos'));
+        if($rifa->status == false){
+            return view("rifafechada");
+        }
 
+        return view('participante', compact('rifa', 'numerosJaEscolhidos'));
     }
 
     private function verificaSessao(Request $request) : string
@@ -110,6 +118,20 @@ class RifaController extends Controller
     public function resetaSorteio(Request $request)
     {
         return response()->json($this->rifaRepository->resetarSorteio($request->id));
+    }
+
+    public function sucesso()
+    {
+        if(!session('valorTotalRifa')){
+            return abort(404);
+        }
+
+        return view('sucesso');
+    }
+
+    public function rifaFechadaView()
+    {
+        return view('rifafechada');
     }
 }
 

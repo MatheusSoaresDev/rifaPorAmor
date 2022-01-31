@@ -13,6 +13,7 @@ function cadastrarPart() {
     for (i = 0; i < checkbox.length; i++) {
         valores[i] = checkbox[i].defaultValue;
     }
+
     var dados = {
         'nome': document.getElementById("nome").value,
         'email': document.getElementById("email").value,
@@ -40,9 +41,19 @@ function cadastrarPart() {
         },
         error: function (xhr) {
             Swal.close();
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Ops!',
+                text: xhr.responseJSON.message,
+            });
         },
         success: function (response) {
-            Swal.close();
+            var valorTotal = valorRifa * valores.length;
+
+            window.location.href = "/sucesso";
         }
     });
 }
+
+

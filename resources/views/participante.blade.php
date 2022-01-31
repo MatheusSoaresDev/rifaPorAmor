@@ -46,4 +46,6 @@
         </form>
     </div>
 
+    <script> var valorRifa = {{ $rifa->valor }} </script>
+
 @endsection
