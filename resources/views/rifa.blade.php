@@ -180,12 +180,12 @@
                                     @endif
                                 </tbody>
                             </table>
-                            <div class="paginate d-flex flex-row-reverse"> {{ $participantes->links() }}</div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="paginate d-flex flex-row-reverse" style="margin-top: 45px;"> {{ $participantes->links() }}</div>
     </div>
 @endsection
 

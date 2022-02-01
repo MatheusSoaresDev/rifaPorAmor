@@ -72,7 +72,7 @@ class ParticipanteRepository extends AbstractRepository implements ParticipanteR
         return Participante::where("id_rifa", $id)
             ->orderBy('vencedor', 'DESC')
             ->orderBy($fitlro)
-            ->paginate(20);
+            ->paginate(10);
     }
 
     public function verificaVencedor(string $id)
